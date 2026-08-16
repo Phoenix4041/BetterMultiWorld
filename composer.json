@@ -1,8 +1,8 @@
 {
-  "name": "czechpmdevs/multiworld",
-  "description": "An advanced world management PocketMine plugin with custom world generators.",
+  "name": "phoenix4041/bettermultiworld",
+  "description": "An advanced world management PocketMine plugin with custom world generators. Based on MultiWorld by CzechPMDevs.",
   "minimum-stability": "dev",
-  "license": "Apache-2.0",
+  "license": "GPL-3.0-only",
   "require": {
     "php": "^8.0",
     "ext-yaml": "*",

@@ -1,3 +1,8 @@
+# BetterMultiWorld
+
+> **This project is based on [MultiWorld](https://github.com/CzechPMDevs/MultiWorld) by [CzechPMDevs](https://github.com/CzechPMDevs) (VixikCZ, fuyutsuki, kaliiks), licensed under GPL-3.0.**
+> This is not an official fork/continuation — it's an independent repository started from that codebase to keep extending it with new features. All credit for the original plugin goes to CzechPMDevs. See [Credits](#-credits) and [License](#-license) below.
+
 <a align="center"><img src="https://image.ibb.co/gPs5Se/Multi_World.png"></a>
 
 <p align="center">
@@ -117,6 +122,9 @@
 
 ## 💰 Credits
 
+**Original plugin**
+- [MultiWorld](https://github.com/CzechPMDevs/MultiWorld) by [CzechPMDevs](https://github.com/CzechPMDevs) — this project is built on top of their work. All original commands, generators and architecture credit them.
+
 **Icon**
 - Icon made by [Freepik](http://www.freepik.com/ "Freepik") from [www.flaticon.com](https://www.flaticon.com/ "Flaticon") is licensed by [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0/ "Creative Commons BY 3.0")
 
@@ -134,11 +142,14 @@
 - French translation by wrathx, [Hydros01](https://github.com/Hydros01)
 - Thai translation by [KohakuChanX](https://github.com/Kuuuuuuuu)
 
-##  💡 License
+## 💡 License
+
+This project is licensed under **GPL-3.0**, same as the original MultiWorld, and remains so per the terms of that license.
 
 ```
-MultiWorld - PocketMine plugin that manages worlds.
-Copyright (C) 2018 - 2023 CzechPMDevs
+BetterMultiWorld - PocketMine plugin that manages worlds.
+Based on MultiWorld, Copyright (C) 2018 - 2023 CzechPMDevs
+Modifications Copyright (C) 2026 Phoenix4041
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
@@ -152,4 +163,4 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <https://www.gnu.org/licenses/>.
 ```
 
-Full license [here](https://github.com/CzechPMDevs/MultiWorld/blob/master/LICENSE).
+Full license text: [LICENSE](LICENSE). Original project: [CzechPMDevs/MultiWorld](https://github.com/CzechPMDevs/MultiWorld).
