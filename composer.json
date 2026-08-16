@@ -1,0 +1,50 @@
+{
+  "name": "czechpmdevs/multiworld",
+  "description": "An advanced world management PocketMine plugin with custom world generators.",
+  "minimum-stability": "dev",
+  "license": "Apache-2.0",
+  "require": {
+    "php": "^8.0",
+    "ext-yaml": "*",
+    "ext-json": "*",
+    "czechpmdevs/libpmform": "*",
+    "muqsit/vanillagenerator": "*",
+    "muqsit/simplepackethandler": "*",
+    "cortexpe/commando": "*",
+    "pocketmine/pocketmine-mp": "^5.0.0"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^1.10.18"
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/CzechPMDevs/libpmform"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/CzechPMDevs/VanillaGenerator"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/ACM-PocketMine-MP/Commando/"
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "muqsit/simplepackethandler",
+        "version": "0.1.0",
+        "source": {
+          "url": "https://github.com/Muqsit/SimplePacketHandler",
+          "type": "git",
+          "reference": "master"
+        }
+      }
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "": ["src"]
+    }
+  }
+}
