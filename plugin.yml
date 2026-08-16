@@ -1,7 +1,7 @@
 name: BetterMultiWorld
 author: Phoenix4041
 authors: [Phoenix4041, CzechPMDevs, VixikCZ, fuyutsuki, kaliiks]
-api: 5.36.0
+api: 5.44.3
 version: 2.1.2
 main: czechpmdevs\multiworld\MultiWorld
 description: Plugin that manages worlds. Based on MultiWorld by CzechPMDevs (GPL-3.0).

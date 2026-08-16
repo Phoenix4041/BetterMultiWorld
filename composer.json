@@ -10,11 +10,11 @@
     "czechpmdevs/libpmform": "*",
     "muqsit/vanillagenerator": "*",
     "muqsit/simplepackethandler": "*",
-    "cortexpe/commando": "*",
+    "cortexpe/commando": "dev-master",
     "pocketmine/pocketmine-mp": "^5.0.0"
   },
   "require-dev": {
-    "phpstan/phpstan": "^1.10.18"
+    "phpstan/phpstan": "^2.1"
   },
   "repositories": [
     {
@@ -27,7 +27,7 @@
     },
     {
       "type": "vcs",
-      "url": "https://github.com/ACM-PocketMine-MP/Commando/"
+      "url": "https://github.com/CortexPE/Commando"
     },
     {
       "type": "package",
@@ -45,6 +45,9 @@
   "autoload": {
     "psr-4": {
       "": ["src"]
-    }
+    },
+    "classmap": [
+      "vendor/muqsit/vanillagenerator/src"
+    ]
   }
 }

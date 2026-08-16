@@ -1,9 +1,18 @@
 # BetterMultiWorld
 
 > **This project is based on [MultiWorld](https://github.com/CzechPMDevs/MultiWorld) by [CzechPMDevs](https://github.com/CzechPMDevs) (VixikCZ, fuyutsuki, kaliiks), licensed under GPL-3.0.**
-> This is not an official fork/continuation — it's an independent repository started from that codebase to keep extending it with new features. All credit for the original plugin goes to CzechPMDevs. See [Credits](#-credits) and [License](#-license) below.
+> This is not an official fork/continuation — it's an independent repository started from that codebase to keep extending it with new features. All credit for the original plugin goes to CzechPMDevs. See [Credits](#credits) and [License](#license) below.
 
-<a align="center"><img src="https://image.ibb.co/gPs5Se/Multi_World.png"></a>
+<p align="center">
+  <a href="https://github.com/Phoenix4041/BetterMultiWorld/releases/latest/download/BetterMultiWorld.phar">
+    <img src="https://img.shields.io/badge/download-latest%20.phar-2ea44f?style=for-the-badge&logo=github">
+  </a>
+  <a href="https://github.com/Phoenix4041/BetterMultiWorld/releases/latest">
+    <img src="https://img.shields.io/github/v/release/Phoenix4041/BetterMultiWorld?style=for-the-badge&label=release">
+  </a>
+</p>
+
+<a align="center"><img src="https://ibb.co/V0VtxPrm"></a>
 
 <p align="center">
   <a href="https://www.paypal.com/donate/?hosted_button_id=SRQH6M2S6LV6Y;">
@@ -35,92 +44,146 @@
     <br><br>
 </p>
 
-## 👍 2.1.0 Update:
+### A world management plugin for PocketMine-MP with custom terrain generators, multi-language support and a form-based management UI.
 
-> - Update to PM5
-> - Crash fixes
-> - New commands /mw setlobby & /mw setspawn
-> - End generator now generates infinite world
-<br>
+---
 
-## ⬇️ Downloads:
+## Features
 
-| Downloads                                         | API       | Downloads                                                                 |
-|---------------------------------------------------|-----------|---------------------------------------------------------------------------|
-| Latest Beta Release (2.1.0)                       | 5.x       | [Poggit](https://poggit.pmmp.io/p/MultiWorld/2.1.0)                 |
-| Latest Stable Release (1.7.0)                     | 4.x       | [Poggit](https://poggit.pmmp.io/r/177396/MultiWorld.phar)                 |
-| Latest Dev Build  (2.0.0 for 4.x / 2.1.0 for 5.x) | 4.x / 5.x | [Poggit CI](https://poggit.pmmp.io/ci/CzechPMDevs/MultiWorld/MultiWorld/) |
-<br>
+* **World Creation**: Generate new worlds with a custom seed and a choice of generator
+* **World Duplication**: Clone an existing world under a new name
+* **Load / Unload**: Load or unload worlds without restarting the server
+* **Rename**: Rename a world's folder and its stored level data together
+* **Teleportation**: Teleport yourself or another player to a world's spawn
+* **World Info**: Inspect name, folder, player count, generator, seed and time of any world
+* **Lobby & Spawn Management**: Set the server's default world/lobby or a world's spawn from your current position in-game
+* **Form-Based Manager**: `/mw manage` opens a GUI to run every action above without typing commands
+* **Custom Generators**: Vanilla-ported Overworld and Nether (biome-accurate terrain), Ender, Void and SkyBlock, plus PocketMine's built-in Normal/Nether/Flat as legacy options
+* **Multi-Language System**: Per-player language selection with automatic fallback to a configured default
+* **Debug Tooling**: `/mw debug` reports the current chunk and biome for diagnosing generator issues
+* **Command Autofill**: All subcommands and their arguments are registered through Commando for in-game tab completion
 
-> **Other plugins by CzechPMDevs [here](https://poggit.pmmp.io/plugins/by/CzechPMDevs)**
+---
 
-<br>
+## Requirements
 
-## 📁 Supported software:
+* PocketMine-MP 5.x (tested against 5.44.3)
+* PHP 8.1+
+* `ext-yaml`, `ext-json`
 
-**This plugin works only on PocketMine-MP.** You can download [MultiWorld by Creeperface](https://github.com/Creeperface01/MultiWorld) for Nukkit or [MultiWorld by ferrybig](https://dev.bukkit.org/projects/multiworld-v-2-0) for Bukkit. **PMMP Spoons are NOT supported.**
+Bundled as virions at build time (see [.poggit.yml](.poggit.yml)): Commando, libpmform, VanillaGenerator.
 
-## 🔧 How to install MultiWorld?
+---
 
-1) [Download](https://poggit.pmmp.io/p/MultiWorld) latest stable released version from poggit
-2) Move dowloaded file to your server **/plugins/** folder
-3) Restart the server
+## Installation
 
-## 🌎 World management commands:
+1. Download the latest `.phar` from the [Releases page](https://github.com/Phoenix4041/BetterMultiWorld/releases/latest) (or use the download badge above), or build it yourself from source
+2. Move the downloaded file into your server's `plugins/` folder
+3. Restart the server
 
-- All MultiWorld commands starts with `/mw` (`/multiworld`) except for the `/gamerule` command that was added as an alias to change game rules from settings.
-- In game, you can get list of all commands using commands `/mw help`
+---
 
-<br>
+## Configuration
 
-**All MultiWorld Commands:**
+The plugin generates `config.yml` and a `languages/` folder on first run. Set the default language and whether to force it for every player in `config.yml`; no further setup is required to use the default settings.
 
-| **Command**      | **Description**                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **/mw help**     | **Displays list of all MultiWorld commands** <br><br> Alias: `/mw ?` <br>Usage: `/mw help <page: 0-1>`                                                                                                                                                                                                                                                                                                                                              |
-| **/mw create**   | **Generate new world using seed and generator** <br><br> Aliases: `/mw new`, `/mw generate` <br> Usage: `/mw create <levelName> [seed] [generator]` <br><br> Seed is value seed is the initial value by which the world is generated, when you set it empty, world will be generated by random number. You can use 6 generators (`Normal`, `Nether`, `End`, `Void`, `SkyBock` and `Nether_Old` = Nether generator without glowstone and quartz ore) |
-| **/mw teleport** | **Teleports you or seleced player to world spawn** <br><br> Aliases: `/mw tp`, `/tp move` <br> Usage: `/mw tp <levelName> [player]` <br><br> If you are using [Slapper](https://poggit.pmmp.io/p/Slapper/) plugin and after you click on the npc you want to move the player to another world, you can use `/slapper edit <id> addcommand mw tp <world> {player}` command                                                                           |
-| **/mw list**     | **Displays list of all levels** <br><br> Alias: `/mw ls` <br> Usage: `/mw list`                                                                                                                                                                                                                                                                                                                                                                     |
-| **/mw info**     | **Displays level information** <br><br> Alias: `/mw i` <br> Usage: `/mw info` <br><br> This command can be used only in game                                                                                                                                                                                                                                                                                                                        |
-| **/mw delete**   | **Remove level** <br><br> Aliases: `/mw del`, `/mw dl`, `/mw remove`, `/mw rm` <br>Usage: `/mw remove <level>` <br><br> Default level can not be deleted                                                                                                                                                                                                                                                                                            |
-| **/mw load**     | **Loads level** <br><br> Aliases: `/mw ld` <br> Usage: `/mw load <level>`                                                                                                                                                                                                                                                                                                                                                                           |
-| **/mw unload**   | **Unloads level** <br><br> Aliases: `/mw unld` <br> Usage: `/mw unload <level>`                                                                                                                                                                                                                                                                                                                                                                     |
-| **/mw rename**   | **Renames level** <br><br>Aliases: `/mw rnm`, `/mw re` <br> Usage: `/mw rename <levelName> <newName>` <br><br> This command changes name of the folder and of nbt too.                                                                                                                                                                                                                                                                              |
-| **/mw manage**   | **Opens world form manager** <br><br>Aliases: `/mw mng`, `/mw mg` <br> Usage: `/mw manage` <br><br> The form manager just dispatches command as a player, so player needs also permission for the command.                                                                                                                                                                                                                                          |
-| **/mw setspawn** | **Updates world spawn** <br><br>Usage: `/mw setspawn`                                                                                                                                                                                                                                                                                                                                                                                               |
-| **/mw setlobby** | **Updates server lobby** <br><br> Usage: `/mw setlobby`                                                                                                                                                                                                                                                                                                                                                                                             |
+---
 
-## ⛰️ Generators
+## Permissions
 
-### Custom World Generator:
+```yaml
+multiworld.command             # Base permission for /multiworld
+multiworld.command.create      # /mw create
+multiworld.command.debug       # /mw debug
+multiworld.command.delete      # /mw delete
+multiworld.command.duplicate   # /mw duplicate
+multiworld.command.help        # /mw help
+multiworld.command.info        # /mw info
+multiworld.command.list        # /mw list
+multiworld.command.load        # /mw load
+multiworld.command.manage      # /mw manage
+multiworld.command.rename      # /mw rename
+multiworld.command.setlobby    # /mw setlobby
+multiworld.command.setspawn    # /mw setspawn
+multiworld.command.teleport    # /mw teleport
+multiworld.command.unload      # /mw unload
+```
 
-<img src="https://github.com/CzechPMDevs/VanillaGenerator/blob/screenshots/screenshots/Forest%20biomes,%20Plains,%20River.png?raw=true">
-<img src="https://github.com/CzechPMDevs/VanillaGenerator/blob/screenshots/screenshots/Ice%20Plains,%20Tundra.png?raw=true">
-<img src="https://github.com/CzechPMDevs/VanillaGenerator/blob/screenshots/screenshots/Savanna%20Mountains.png?raw=true">
-<img src="https://github.com/CzechPMDevs/VanillaGenerator/blob/screenshots/screenshots/Savanna.png?raw=true">
-<img src="https://github.com/CzechPMDevs/VanillaGenerator/blob/screenshots/screenshots/Swamp,%20Mountains.png?raw=true">
+All permissions default to `op`.
 
-###  Nether World Generator:
-<img src="https://i.ibb.co/1KXb8FX/image.png">
-<img src="https://i.ibb.co/xm05rDw/image.png">
+---
 
-### End World Generator:
-<img src="https://i.ibb.co/G7rbRHp/image.png">
-<img src="https://i.ibb.co/KsPPjrJ/image.png">
+## Usage
 
-### SkyBlock Generator:
-<img src="https://i.ibb.co/DDVM4zM/image.png">
+### Commands
 
-## 🌐Add your language!
+All commands start with `/multiworld` (`/mw`, `/wm`). Use `/mw help` in-game for the full list.
 
-- Do you want to help with the development of MultiWorld? Add your native language!
+| Command | Aliases | Usage | Description |
+| :--- | :--- | :--- | :--- |
+| `/mw create` | `new`, `c` | `/mw create <name> [seed] [generator]` | Generates a new world. Seed defaults to random; generator defaults to `normal` |
+| `/mw duplicate` | `dp` | `/mw duplicate <world> [newName]` | Clones a world under a new name (defaults to `<world>_copy`) |
+| `/mw delete` | `remove`, `rm`, `del` | `/mw delete <world>` | Deletes a world and its files |
+| `/mw load` | `ld` | `/mw load <world>` | Loads a generated but unloaded world |
+| `/mw unload` | `uld` | `/mw unload <world>` | Unloads a currently loaded world |
+| `/mw rename` | `rnm`, `rn` | `/mw rename <world> <newName>` | Renames a world's folder and stored level data |
+| `/mw teleport` | `tp` | `/mw teleport <world> [player]` | Teleports yourself or a target player to the world's spawn |
+| `/mw list` | `ls`, `l` | `/mw list` | Lists every world, including unloaded ones |
+| `/mw info` | `i` | `/mw info` | Shows information about the world you're standing in (in-game only) |
+| `/mw manage` | `mng`, `m` | `/mw manage` | Opens a form to run any of the above without typing commands |
+| `/mw setlobby` | `lobby` | `/mw setlobby` | Sets the server's default world and spawn to your current position |
+| `/mw setspawn` | `spawn` | `/mw setspawn` | Sets the current world's spawn to your position |
+| `/mw debug` | — | `/mw debug` | Prints your current chunk position and biome (in-game only) |
+| `/mw help` | `?` | `/mw help [page]` | Lists all MultiWorld commands |
 
-1) Open [lanuage resource file](https://github.com/CzechPMDevs/MultiWorld/tree/master/resources/languages)
-2) Click create new file
-3) Translate e.g. language from English file https://github.com/CzechPMDevs/MultiWorld/blob/2.0.0/resources/languages/en_US.yml
-4) Click Propose new file
+### Generators
 
-## 💰 Credits
+Pass any of these names to `/mw create`:
+
+| Name | Aliases | Description |
+| :--- | :--- | :--- |
+| `normal` | `classic`, `basic`, `vanilla` | Vanilla-ported Overworld generator with full biome support |
+| `nether` | `hell` | Vanilla-ported Nether generator |
+| `end` | `ender` | Ender/End generator |
+| `void` | `empty`, `emptyworld` | Empty world with no terrain |
+| `skyblock` | `sb` | Generates a starter SkyBlock island |
+| `flat` | `superflat` | PocketMine's built-in flat generator |
+| `normal_old` | — | PocketMine's built-in Normal generator (simpler terrain) |
+| `nether_old` | — | PocketMine's built-in Nether generator (no glowstone/quartz ore) |
+
+---
+
+## Architecture
+
+```
+src/
+└── czechpmdevs/multiworld/
+    ├── MultiWorld.php                 # Main plugin class
+    ├── command/
+    │   ├── MultiWorldCommand.php      # Base command, registers all subcommands
+    │   └── subcommand/                # One class per /mw subcommand
+    ├── generator/
+    │   ├── ender/                     # Ender/End generator
+    │   ├── skyblock/                  # SkyBlock generator & populator
+    │   └── void/                      # Void generator
+    └── util/
+        ├── ConfigManager.php          # Config loading & versioning
+        ├── LanguageManager.php        # Per-player language resolution
+        └── WorldUtils.php             # World lookup, generator resolution, duplication
+```
+
+---
+
+## Adding a Language
+
+1. Open the [language resource folder](resources/languages)
+2. Copy `en_US.yml` and translate its values into your language
+3. Save it as `<your_locale>.yml` in the same folder
+4. Open a pull request
+
+---
+
+## Credits
 
 **Original plugin**
 - [MultiWorld](https://github.com/CzechPMDevs/MultiWorld) by [CzechPMDevs](https://github.com/CzechPMDevs) — this project is built on top of their work. All original commands, generators and architecture credit them.
@@ -142,7 +205,9 @@
 - French translation by wrathx, [Hydros01](https://github.com/Hydros01)
 - Thai translation by [KohakuChanX](https://github.com/Kuuuuuuuu)
 
-## 💡 License
+---
+
+## License
 
 This project is licensed under **GPL-3.0**, same as the original MultiWorld, and remains so per the terms of that license.
 
@@ -164,3 +229,13 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 ```
 
 Full license text: [LICENSE](LICENSE). Original project: [CzechPMDevs/MultiWorld](https://github.com/CzechPMDevs/MultiWorld).
+
+---
+
+## Support
+
+For issues, feature requests, or questions, open an [Issue](https://github.com/Phoenix4041/BetterMultiWorld/issues) on this repository.
+
+---
+
+**Maintained by Phoenix4041**

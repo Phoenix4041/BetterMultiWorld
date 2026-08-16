@@ -75,13 +75,17 @@ class ManageSubCommand extends BaseSubCommand {
 
 					$customForm->setCallback(static function(Player $player, FormResponse $response) use ($generators): void {
 						$data = $response->getData();
-						if(!is_array($data) || $data[1] === "" || ($data[2] != "" && !is_numeric($data[2])) || !isset($generators[$data[3]])) {
+						if(!is_array($data) || !is_string($data[1] ?? null) || !is_string($data[2] ?? null) || !is_int($data[3] ?? null)) {
+							$player->sendMessage(LanguageManager::translateMessage($player, "forms-invalid"));
+							return;
+						}
+						if($data[1] === "" || ($data[2] !== "" && !is_numeric($data[2])) || !isset($generators[$data[3]])) {
 							$player->sendMessage(LanguageManager::translateMessage($player, "forms-invalid"));
 							return;
 						}
 
 						$name = $data[1];
-						$seed = trim($data[2]) == "" ? time() : (int)$data[2];
+						$seed = trim($data[2]) === "" ? time() : (int) $data[2];
 
 						$cmd = "mw create \"$name\" \"$seed\" \"{$generators[$data[3]]}\"";
 						Server::getInstance()->dispatchCommand($player, $cmd);
@@ -95,7 +99,7 @@ class ManageSubCommand extends BaseSubCommand {
 
 					$customForm->setCallback(static function(Player $player, FormResponse $response) use ($worlds): void {
 						$data = $response->getData();
-						if(!is_array($data) || $data[1] === "") {
+						if(!is_array($data) || !is_int($data[1] ?? null) || !isset($worlds[$data[1]])) {
 							$player->sendMessage(LanguageManager::translateMessage($player, "forms-invalid"));
 							return;
 						}
@@ -112,7 +116,7 @@ class ManageSubCommand extends BaseSubCommand {
 
 					$customForm->setCallback(static function(Player $player, FormResponse $response) use ($worlds): void {
 						$data = $response->getData();
-						if(!is_array($data) || !isset($data[1])) {
+						if(!is_array($data) || !is_int($data[1] ?? null) || !isset($worlds[$data[1]])) {
 							$player->sendMessage(LanguageManager::translateMessage($player, "forms-invalid"));
 							return;
 						}
@@ -134,7 +138,7 @@ class ManageSubCommand extends BaseSubCommand {
 							return;
 						}
 
-						if(!isset($worlds[$data[1]])) {
+						if(!is_int($data[1] ?? null) || !isset($worlds[$data[1]])) {
 							$player->sendMessage(LanguageManager::translateMessage($player, "forms-invalid"));
 							return;
 						}
@@ -156,7 +160,7 @@ class ManageSubCommand extends BaseSubCommand {
 							return;
 						}
 
-						if(!isset($worlds[$data[1]])) {
+						if(!is_int($data[1] ?? null) || !isset($worlds[$data[1]])) {
 							$player->sendMessage(LanguageManager::translateMessage($player, "forms-invalid"));
 							return;
 						}
@@ -178,7 +182,7 @@ class ManageSubCommand extends BaseSubCommand {
 							return;
 						}
 
-						if(!isset($worlds[$data[1]])) {
+						if(!is_int($data[1] ?? null) || !isset($worlds[$data[1]])) {
 							$player->sendMessage(LanguageManager::translateMessage($player, "forms-invalid"));
 							return;
 						}
@@ -201,7 +205,7 @@ class ManageSubCommand extends BaseSubCommand {
 							return;
 						}
 
-						if(!isset($players[$data[1]]) || !isset($worlds[$data[2]])) {
+						if(!is_int($data[1] ?? null) || !is_int($data[2] ?? null) || !isset($players[$data[1]]) || !isset($worlds[$data[2]])) {
 							$player->sendMessage(LanguageManager::translateMessage($player, "forms-invalid"));
 							return;
 						}

@@ -64,7 +64,8 @@ class ConfigManager {
 		}
 
 		// Loads prefix
-		ConfigManager::$prefix = MultiWorld::getInstance()->getConfig()->get("prefix") . " §a";
+		$prefix = MultiWorld::getInstance()->getConfig()->get("prefix");
+		ConfigManager::$prefix = (is_string($prefix) ? $prefix : "§7[MultiWorld]") . " §a";
 	}
 
 	private function saveConfig(bool $replace = false): void {

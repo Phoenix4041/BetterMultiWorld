@@ -35,59 +35,33 @@ class Island implements Populator {
 		$center = new Vector3(256, 68, 256);
 
 		for($x = -1; $x <= 1; $x++) {
-			/** @phpstan-var float $x */
 			for($y = -1; $y <= 1; $y++) {
-				/** @phpstan-var float $y */
 				for($z = -1; $z <= 1; $z++) {
-					/** @phpstan-var float $z */
-
 					// center
 					$centerVec = $center->add($x, $y, $z);
-					if($centerVec->getY() == 69) {
-						/** @phpstan-ignore-next-line */
-						$world->setBlockAt($centerVec->getX(), $centerVec->getY(), $centerVec->getZ(), VanillaBlocks::GRASS());
-					} else {
-						/** @phpstan-ignore-next-line */
-						$world->setBlockAt($centerVec->getX(), $centerVec->getY(), $centerVec->getZ(), VanillaBlocks::DIRT());
-					}
+					$world->setBlockAt($centerVec->getFloorX(), $centerVec->getFloorY(), $centerVec->getFloorZ(), $centerVec->getY() === 69.0 ? VanillaBlocks::GRASS() : VanillaBlocks::DIRT());
 
 					// left
 					$leftVec = $center->add(3, 0, 0)->add($x, $y, $z);
-					if($leftVec->getY() == 69) {
-						/** @phpstan-ignore-next-line */
-						$world->setBlockAt($leftVec->getX(), $leftVec->getY(), $leftVec->getZ(), VanillaBlocks::GRASS());
-					} else {
-						/** @phpstan-ignore-next-line */
-						$world->setBlockAt($leftVec->getX(), $leftVec->getY(), $leftVec->getZ(), VanillaBlocks::DIRT());
-					}
+					$world->setBlockAt($leftVec->getFloorX(), $leftVec->getFloorY(), $leftVec->getFloorZ(), $leftVec->getY() === 69.0 ? VanillaBlocks::GRASS() : VanillaBlocks::DIRT());
 
 					// down
 					$downVec = $center->subtract(0, 0, 3)->add($x, $y, $z);
-					if($leftVec->getY() == 69) {
-						/** @phpstan-ignore-next-line */
-						$world->setBlockAt($downVec->getX(), $downVec->getY(), $downVec->getZ(), VanillaBlocks::GRASS());
-					} else {
-						/** @phpstan-ignore-next-line */
-						$world->setBlockAt($downVec->getX(), $downVec->getY(), $downVec->getZ(), VanillaBlocks::DIRT());
-					}
+					$world->setBlockAt($downVec->getFloorX(), $downVec->getFloorY(), $downVec->getFloorZ(), $leftVec->getY() === 69.0 ? VanillaBlocks::GRASS() : VanillaBlocks::DIRT());
 				}
 			}
 		}
 
 		// chest
 		$chestVec = $center->add(0, 2, -4);
-		/** @phpstan-ignore-next-line */
-		$world->setBlockAt($chestVec->getX(), $chestVec->getY(), $chestVec->getZ(), VanillaBlocks::CHEST());
+		$world->setBlockAt($chestVec->getFloorX(), $chestVec->getFloorY(), $chestVec->getFloorZ(), VanillaBlocks::CHEST());
 
 		// tree
 		$treeVec = $center->add(4, 2, 1);
 		$tree = new OakTree;
-
-		/** @phpstan-ignore-next-line */
-		$tree->getBlockTransaction($world, $treeVec->getX(), $treeVec->getY(), $treeVec->getZ(), $random)->apply();
+		$tree->getBlockTransaction($world, $treeVec->getFloorX(), $treeVec->getFloorY(), $treeVec->getFloorZ(), $random)?->apply();
 
 		// bedrock
-		/** @phpstan-ignore-next-line */
-		$world->setBlockAt($center->getX(), $center->getY(), $center->getZ(), VanillaBlocks::BEDROCK());
+		$world->setBlockAt($center->getFloorX(), $center->getFloorY(), $center->getFloorZ(), VanillaBlocks::BEDROCK());
 	}
 }

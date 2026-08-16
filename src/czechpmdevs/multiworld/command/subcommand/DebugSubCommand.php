@@ -48,8 +48,8 @@ class DebugSubCommand extends BaseSubCommand {
 		$position = $sender->getPosition()->floor();
 		$sender->sendMessage("Current position: {$position->getX()}, {$position->getY()}, {$position->getZ()}");
 
-		$chunkX = $position->getX() >> Chunk::COORD_BIT_SIZE;
-		$chunkZ = $position->getZ() >> Chunk::COORD_BIT_SIZE;
+		$chunkX = $position->getFloorX() >> Chunk::COORD_BIT_SIZE;
+		$chunkZ = $position->getFloorZ() >> Chunk::COORD_BIT_SIZE;
 		$sender->sendMessage("Current chunk position: $chunkX, $chunkZ");
 
 		$chunk = $sender->getPosition()->getWorld()->getChunk($chunkX, $chunkZ);

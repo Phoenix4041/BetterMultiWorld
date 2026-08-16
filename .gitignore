@@ -1,4 +1,5 @@
 .idea
 vendor
 out
+build
 .php_cs.cache
